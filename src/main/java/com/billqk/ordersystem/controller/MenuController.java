@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,13 +19,21 @@ public class MenuController {
     MenuRepository menuRepository;
 
     @GetMapping("/")
-    public String getMenu() {
-        String results = "";
+    public List<MenuDto>  getMenu() {
+
         List<MenuEntity> menuEntityList = menuRepository.findAll();
+        List<MenuDto> menuDtosList = new ArrayList<MenuDto>();
         for(MenuEntity menuEntity : menuEntityList) {
-            results += menuEntity.getId() + " " + menuEntity.getName() + " " + menuEntity.getDescription() + "\n";
+            MenuDto menuDto = new MenuDto();
+            menuDto.setId(menuEntity.getId());
+            menuDto.setName(menuEntity.getName());
+            menuDto.setDescription(menuEntity.getDescription());
+            menuDto.setPrice(menuEntity.getPrice());
+            menuDto.setCategory(menuEntity.getCategory());
+
+            menuDtosList.add(menuDto);
         }
-        return results;
+        return menuDtosList;
     }
 
     @PostMapping("/")
@@ -33,7 +42,9 @@ public class MenuController {
         MenuEntity menuEntity = new MenuEntity();
         menuEntity.setName(menuDto.getName());
         menuEntity.setDescription(menuDto.getDescription());
+        menuEntity.setCategory(menuDto.getCategory());
         menuRepository.save(menuEntity);
         return "Menu added";
     }
+
 }
