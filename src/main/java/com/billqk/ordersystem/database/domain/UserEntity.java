@@ -1,7 +1,6 @@
 package com.billqk.ordersystem.database.domain;
 
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
