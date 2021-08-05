@@ -23,11 +23,11 @@ public class UserController {
         List<UserDto> userDtoList = new ArrayList<UserDto>();
         for (UserEntity userEntity : userEntityList) {
             UserDto userDto = new UserDto();
-            userDto.setId(userDto.getId());
-            userDto.setAge(userDto.getAge());
-            userDto.setEmail(userDto.getEmail());
-            userDto.setFirstname(userDto.getFirstname());
-            userDto.setLastname(userDto.getFirstname());
+            userDto.setId(userEntity.getId());
+            userDto.setAge(userEntity.getAge());
+            userDto.setEmail(userEntity.getEmail());
+            userDto.setFirstname(userEntity.getFirstname());
+            userDto.setLastname(userEntity.getFirstname());
 
             userDtoList.add(userDto);
         }
