@@ -19,7 +19,7 @@ public class UserEntity {
 
     private String firstname;
     private String lastname;
-    private URL email;
+    private String email;
     private int age;
 
     public String getFirstname() {
@@ -38,11 +38,11 @@ public class UserEntity {
         this.lastname = lastname;
     }
 
-    public URL getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(URL email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

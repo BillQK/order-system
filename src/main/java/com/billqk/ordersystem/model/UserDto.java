@@ -6,7 +6,7 @@ public class UserDto {
     private Long id;
     private String firstname;
     private String lastname;
-    private URL email;
+    private String email;
     private int age;
 
     public Long getId() {
@@ -33,11 +33,11 @@ public class UserDto {
         this.lastname = lastname;
     }
 
-    public URL getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(URL email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
