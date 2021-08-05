@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.net.URL;
 
 @Entity
-@Table(name = "/user")
+@Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
 public class UserEntity {
     // Primary Key
