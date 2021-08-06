@@ -48,4 +48,7 @@ public class UserDto {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public void setMobile(int mobile) {
+    }
 }

@@ -28,6 +28,7 @@ public class UserController {
             userDto.setEmail(userEntity.getEmail());
             userDto.setFirstname(userEntity.getFirstname());
             userDto.setLastname(userEntity.getFirstname());
+            userDto.setMobile(userEntity.getMobile());
 
             userDtoList.add(userDto);
         }

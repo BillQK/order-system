@@ -1,7 +1,9 @@
 package com.billqk.ordersystem.controller;
 
 import com.billqk.ordersystem.database.domain.MenuEntity;
+import com.billqk.ordersystem.database.domain.UserEntity;
 import com.billqk.ordersystem.database.repository.MenuRepository;
+import com.billqk.ordersystem.database.repository.UserRepository;
 import com.billqk.ordersystem.model.MenuDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,19 +20,28 @@ public class MenuController {
     @Autowired
     MenuRepository menuRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping("/")
     public List<MenuDto>  getMenu() {
 
         List<MenuEntity> menuEntityList = menuRepository.findAll();
+
         List<MenuDto> menuDtosList = new ArrayList<MenuDto>();
         for(MenuEntity menuEntity : menuEntityList) {
             MenuDto menuDto = new MenuDto();
-            menuDto.setId(menuEntity.getId());
-            menuDto.setName(menuEntity.getName());
+            // get user entity
+            UserEntity userEntity = menuEntity.getUserEntity();
+            // add menu variables
+            menuDto.setMenuId(menuEntity.getMenuId());
+            menuDto.setMenuName(menuEntity.getMenuName());
             menuDto.setDescription(menuEntity.getDescription());
             menuDto.setPrice(menuEntity.getPrice());
             menuDto.setCategory(menuEntity.getCategory());
-
+            menuDto.setStatus(menuEntity.isStatus());
+            // add user id
+            menuDto.setUserId(userEntity.getId());
             menuDtosList.add(menuDto);
         }
         return menuDtosList;
@@ -39,11 +50,19 @@ public class MenuController {
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public String createMenu(@Valid @RequestBody MenuDto menuDto) {
+
+        UserEntity userEntity =
+                userRepository.findById(menuDto.getUserId()).orElseThrow(()
+                        -> new RuntimeException("user id not found: "));;
         MenuEntity menuEntity = new MenuEntity();
-        menuEntity.setName(menuDto.getName());
+        menuEntity.setUserEntity(userEntity);
+        menuEntity.setMenuName(menuDto.getMenuName());
         menuEntity.setDescription(menuDto.getDescription());
         menuEntity.setCategory(menuDto.getCategory());
+        menuEntity.setPrice(menuDto.getPrice());
+        menuEntity.setStatus(menuDto.isStatus());
         menuRepository.save(menuEntity);
+
         return "Menu added";
     }
 

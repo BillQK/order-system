@@ -16,11 +16,19 @@ public class UserEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-
     private String firstname;
     private String lastname;
     private String email;
     private int age;
+    private int mobile;
+
+    public int getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(int mobile) {
+        this.mobile = mobile;
+    }
 
     public String getFirstname() {
         return firstname;

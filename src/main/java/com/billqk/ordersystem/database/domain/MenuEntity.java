@@ -4,6 +4,8 @@ import com.billqk.ordersystem.constant.Constant;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+
+
 @Entity
 @Table(name = "menu")
 @EntityListeners(AuditingEntityListener.class)
@@ -12,19 +14,50 @@ public class MenuEntity {
     // variables
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
+    @Column(name = "menu_Id", updatable = false, nullable = false)
+    private Long menuId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable=false)
+    private UserEntity userEntity;
 
     @Column(nullable = false)
-    private String name;
+    private String menuName;
     private String description;
     private Double price;
+    private boolean status;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Constant.Category category;
 
+
     //getter and setter
+
+
+    public Long getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     public Constant.Category getCategory() {
         return category;
     }
@@ -33,7 +66,13 @@ public class MenuEntity {
         this.category = category;
     }
 
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
 
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
 
     public Double getPrice() {
         return this.price;
@@ -43,22 +82,12 @@ public class MenuEntity {
         this.price = price;
     }
 
-    public Long getId() {
-        return id;
-    }
     public String getDescription() {
         return description;
     }
+
     public void setDescription (String description) {
         this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

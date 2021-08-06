@@ -2,17 +2,52 @@ package com.billqk.ordersystem.model;
 
 import com.billqk.ordersystem.constant.Constant;
 
+
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
-
-
 public class MenuDto {
-    private Long id;
+    private Long menuId;
+    private Long userId;
     private String description;
-    private String name;
+    private boolean status;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public Long getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
+
+    private String menuName;
     private Double price;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
 
     public Constant.Category getCategory() {
         return category;
@@ -32,22 +67,14 @@ public class MenuDto {
         this.price = price;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getName() { return name; }
 
-    public void setName(String name) { this.name = name; }
+
 
 }
