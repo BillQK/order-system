@@ -12,7 +12,7 @@ public class OrderEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "user_Id", nullable = false)
     private UserEntity userEntity;
 
     private MenuEntity menuEntity;
