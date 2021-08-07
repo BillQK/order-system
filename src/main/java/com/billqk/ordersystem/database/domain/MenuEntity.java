@@ -14,12 +14,8 @@ public class MenuEntity {
     // variables
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "menu_Id", updatable = false, nullable = false)
-    private Long menuId;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable=false)
-    private UserEntity userEntity;
+    @Column(name = "menu_Id", nullable = false, updatable = false)
+    private long menuId;
 
     @Column(nullable = false)
     private String menuName;
@@ -33,7 +29,6 @@ public class MenuEntity {
 
 
     //getter and setter
-
 
     public Long getMenuId() {
         return menuId;
@@ -64,14 +59,6 @@ public class MenuEntity {
 
     public void setCategory(Constant.Category category) {
         this.category = category;
-    }
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
     }
 
     public Double getPrice() {

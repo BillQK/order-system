@@ -28,11 +28,11 @@ public class MenuController {
 
         List<MenuEntity> menuEntityList = menuRepository.findAll();
 
-        List<MenuDto> menuDtosList = new ArrayList<MenuDto>();
+        List<MenuDto> menuDtoList = new ArrayList<MenuDto>();
         for(MenuEntity menuEntity : menuEntityList) {
             MenuDto menuDto = new MenuDto();
             // get user entity
-            UserEntity userEntity = menuEntity.getUserEntity();
+            UserEntity userEntity = menuEntity.get
             // add menu variables
             menuDto.setMenuId(menuEntity.getMenuId());
             menuDto.setMenuName(menuEntity.getMenuName());
@@ -42,20 +42,15 @@ public class MenuController {
             menuDto.setStatus(menuEntity.isStatus());
             // add user id
             menuDto.setUserId(userEntity.getId());
-            menuDtosList.add(menuDto);
+            menuDtoList.add(menuDto);
         }
-        return menuDtosList;
+        return menuDtoList;
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public String createMenu(@Valid @RequestBody MenuDto menuDto) {
-
-        UserEntity userEntity =
-                userRepository.findById(menuDto.getUserId()).orElseThrow(()
-                        -> new RuntimeException("user id not found: "));;
         MenuEntity menuEntity = new MenuEntity();
-        menuEntity.setUserEntity(userEntity);
         menuEntity.setMenuName(menuDto.getMenuName());
         menuEntity.setDescription(menuDto.getDescription());
         menuEntity.setCategory(menuDto.getCategory());
