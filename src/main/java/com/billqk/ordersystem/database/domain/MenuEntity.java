@@ -5,25 +5,63 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 
 @Entity
-@Table(name = "menu")
+@Table(name = "menus")
 @EntityListeners(AuditingEntityListener.class)
 public class MenuEntity {
 
     // variables
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "menu_Id", nullable = false, updatable = false)
+    @SequenceGenerator(
+            name = "menu_sequence",
+            sequenceName = "menu_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "menu_sequence"
+    )
+    @Column(
+            name = "menu_id",
+            nullable = false,
+            updatable = false
+    )
     private long menuId;
 
-    @Column(nullable = false)
+    @Column(
+            name = "menu_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String menuName;
+    @Column(
+            name = "description",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String description;
+
+    @Column(
+            name = "price",
+            nullable = false
+    )
     private Double price;
+
+    @Column(
+            name = "status",
+            nullable = false
+    )
+
     private boolean status;
 
-    @Column(nullable = false)
+    @Column(
+            name = "category",
+            nullable = false
+
+    )
     @Enumerated(EnumType.STRING)
     private Constant.Category category;
 
@@ -77,4 +115,16 @@ public class MenuEntity {
         this.description = description;
     }
 
+
+    @Override
+    public String toString() {
+        return "MenuEntity{" +
+                "menuId=" + menuId +
+                ", menuName='" + menuName + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", status=" + status +
+                ", category=" + category +
+                '}';
+    }
 }

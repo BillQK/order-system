@@ -9,7 +9,6 @@ import javax.persistence.Enumerated;
 
 public class MenuDto {
     private Long menuId;
-    private Long userId;
     private String description;
     private boolean status;
 
@@ -39,15 +38,6 @@ public class MenuDto {
 
     private String menuName;
     private Double price;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
 
     public Constant.Category getCategory() {
         return category;

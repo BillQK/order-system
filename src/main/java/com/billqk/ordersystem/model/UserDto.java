@@ -8,6 +8,11 @@ public class UserDto {
     private String lastname;
     private String email;
     private int age;
+    private int mobile;
+
+    public int getMobile() {
+        return mobile;
+    }
 
     public Long getId() {
         return id;

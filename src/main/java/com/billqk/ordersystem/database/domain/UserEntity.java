@@ -6,44 +6,86 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.net.URL;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
 public class UserEntity {
     // Primary Key
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "user_sequence"
 
-    private String firstname;
-    private String lastname;
+    )
+    @Column(
+            name = "user_id",
+            updatable = false,
+            nullable = false
+    )
+    private Long user_id;
+
+    @Column(
+            name = "first_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String first_name;
+
+    @Column(
+            name = "last_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String last_name;
+
+    @Column(
+            name = "email",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String email;
+
+    @Column(
+            name = "age",
+            nullable = false
+    )
     private int age;
+
+    @Column(
+            name = "mobile",
+            nullable = false
+    )
     private int mobile;
 
-    public int getMobile() {
-        return mobile;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setMobile(int mobile) {
-        this.mobile = mobile;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getEmail() {
@@ -62,12 +104,11 @@ public class UserEntity {
         this.age = age;
     }
 
-
-    public Long getId() {
-        return id;
+    public int getMobile() {
+        return mobile;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMobile(int mobile) {
+        this.mobile = mobile;
     }
 }

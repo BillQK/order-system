@@ -23,13 +23,13 @@ public class UserController {
         List<UserDto> userDtoList = new ArrayList<UserDto>();
         for (UserEntity userEntity : userEntityList) {
             UserDto userDto = new UserDto();
-            userDto.setId(userEntity.getId());
+            // Setting attributes
             userDto.setAge(userEntity.getAge());
             userDto.setEmail(userEntity.getEmail());
-            userDto.setFirstname(userEntity.getFirstname());
-            userDto.setLastname(userEntity.getFirstname());
+            userDto.setFirstname(userEntity.getFirst_name());
+            userDto.setLastname(userEntity.getLast_name());
             userDto.setMobile(userEntity.getMobile());
-
+            // Adding to list of user
             userDtoList.add(userDto);
         }
         return userDtoList;
@@ -39,10 +39,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public String createUser (@Valid @RequestBody UserDto userDto) {
         UserEntity userEntity = new UserEntity();
+        userEntity.setFirst_name(userDto.getFirstname());
+        userEntity.setLast_name(userDto.getLastname());
+        userEntity.setMobile(userDto.getMobile());
         userEntity.setAge(userDto.getAge());
         userEntity.setEmail(userDto.getEmail());
-        userEntity.setFirstname(userDto.getFirstname());
-        userEntity.setLastname(userDto.getLastname());
         userRepository.save(userEntity);
         return "User added";
     }

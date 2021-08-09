@@ -20,8 +20,7 @@ public class MenuController {
     @Autowired
     MenuRepository menuRepository;
 
-    @Autowired
-    UserRepository userRepository;
+
 
     @GetMapping("/")
     public List<MenuDto>  getMenu() {
@@ -30,18 +29,15 @@ public class MenuController {
 
         List<MenuDto> menuDtoList = new ArrayList<MenuDto>();
         for(MenuEntity menuEntity : menuEntityList) {
+            // MenuDto
             MenuDto menuDto = new MenuDto();
-            // get user entity
-            UserEntity userEntity = menuEntity.get
-            // add menu variables
+            // Setting attribute
             menuDto.setMenuId(menuEntity.getMenuId());
             menuDto.setMenuName(menuEntity.getMenuName());
-            menuDto.setDescription(menuEntity.getDescription());
-            menuDto.setPrice(menuEntity.getPrice());
-            menuDto.setCategory(menuEntity.getCategory());
             menuDto.setStatus(menuEntity.isStatus());
-            // add user id
-            menuDto.setUserId(userEntity.getId());
+            menuDto.setCategory(menuEntity.getCategory());
+            menuDto.setPrice(menuEntity.getPrice());
+            // Adding to list
             menuDtoList.add(menuDto);
         }
         return menuDtoList;

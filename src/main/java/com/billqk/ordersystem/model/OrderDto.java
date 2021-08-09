@@ -1,12 +1,13 @@
 package com.billqk.ordersystem.model;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 public class OrderDto {
     private Long orderId;
     private Long userId;
     private Date orderDate;
-    private boolean status;
+    private String status;
 
     public Long getOrderId() {
         return orderId;
@@ -32,11 +33,11 @@ public class OrderDto {
         this.orderDate = orderDate;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }
