@@ -64,7 +64,7 @@ public class UserEntity {
             nullable = false,
             columnDefinition = "INTEGER"
     )
-    private int mobile;
+    private Integer mobile;
 
     public Long getUser_id() {
         return user_id;

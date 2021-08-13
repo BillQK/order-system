@@ -32,6 +32,7 @@ public class OrderController {
             // Get User
             orderDto.setUserId(orderEntity.getUserEntity().getUser_id());
             //Setting attributes
+            orderDto.setOrderId(orderEntity.getOrder_id());
             orderDto.setOrderDate(orderEntity.getOrderDate());
             orderDto.setStatus(orderEntity.getStatus());
 
