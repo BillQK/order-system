@@ -31,13 +31,13 @@ public class OrderEntity {
             updatable = false,
             nullable = false
     )
-
     private Long order_id;
 
     @ManyToOne
     @JoinColumn(
-            name = "user_Id",
-            nullable = false
+            name = "user_id",
+            nullable = false,
+            columnDefinition = "INTEGER"
     )
     private UserEntity userEntity;
 

@@ -20,8 +20,6 @@ public class MenuController {
     @Autowired
     MenuRepository menuRepository;
 
-
-
     @GetMapping("/")
     public List<MenuDto>  getMenu() {
 
@@ -37,6 +35,7 @@ public class MenuController {
             menuDto.setStatus(menuEntity.isStatus());
             menuDto.setCategory(menuEntity.getCategory());
             menuDto.setPrice(menuEntity.getPrice());
+            menuDto.setDescription(menuEntity.getDescription());
             // Adding to list
             menuDtoList.add(menuDto);
         }

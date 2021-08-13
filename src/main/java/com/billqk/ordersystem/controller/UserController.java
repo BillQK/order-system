@@ -29,6 +29,7 @@ public class UserController {
             userDto.setFirstname(userEntity.getFirst_name());
             userDto.setLastname(userEntity.getLast_name());
             userDto.setMobile(userEntity.getMobile());
+            userDto.setId(userEntity.getUser_id());
             // Adding to list of user
             userDtoList.add(userDto);
         }

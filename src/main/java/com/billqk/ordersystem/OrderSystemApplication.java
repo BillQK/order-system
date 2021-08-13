@@ -24,8 +24,8 @@ import org.springframework.stereotype.Controller;
 @SpringBootApplication
 public class OrderSystemApplication {
 
-  public static void main(String[] args) throws Exception {
-    SpringApplication.run(OrderSystemApplication.class, args);
-  }
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(OrderSystemApplication.class, args);
+    }
 
 }

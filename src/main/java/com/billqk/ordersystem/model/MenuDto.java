@@ -11,6 +11,8 @@ public class MenuDto {
     private Long menuId;
     private String description;
     private boolean status;
+    private String menuName;
+    private Double price;
 
     public boolean isStatus() {
         return status;
@@ -36,8 +38,7 @@ public class MenuDto {
         this.menuName = menuName;
     }
 
-    private String menuName;
-    private Double price;
+
 
     public Constant.Category getCategory() {
         return category;
@@ -58,7 +59,7 @@ public class MenuDto {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {

@@ -54,13 +54,15 @@ public class UserEntity {
 
     @Column(
             name = "age",
-            nullable = false
+            nullable = false,
+            columnDefinition = "INTEGER"
     )
     private int age;
 
     @Column(
             name = "mobile",
-            nullable = false
+            nullable = false,
+            columnDefinition = "INTEGER"
     )
     private int mobile;
 
