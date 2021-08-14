@@ -1,9 +1,33 @@
 package com.billqk.ordersystem.database.domain;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "order_details")
+@EntityListeners(AuditingEntityListener.class)
 public class OrderDetailsEntity {
+
+
+    @Id
+    @SequenceGenerator(
+            name = "order_details_id_generator",
+            sequenceName = "order_details_id_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "order_details_id_generator"
+    )
+    @Column(
+            name = "order_details_id",
+            nullable = false,
+            updatable = false
+    )
+    private Long order_details_id;
+
     @ManyToOne
     @JoinColumn(
             name = "order_id",
@@ -65,6 +89,16 @@ public class OrderDetailsEntity {
     public void setTotalprice(double totalprice) {
         this.totalprice = totalprice;
     }
+
+    public Long getOrder_details_id() {
+        return order_details_id;
+    }
+
+    public void setOrder_details_id(Long order_details_id) {
+        this.order_details_id = order_details_id;
+    }
+
+
 }
 
 

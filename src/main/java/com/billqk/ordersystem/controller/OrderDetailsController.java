@@ -42,7 +42,9 @@ public class OrderDetailsController {
             orderdetailsDto.setOrderId(orderDetailsEntity.getOrderEntity().getOrder_id());
             orderdetailsDto.setTotalprice(orderDetailsEntity.getTotalprice());
             orderdetailsDto.setMenuId(orderDetailsEntity.getMenuEntity().getMenuId());
+            orderdetailsDto.setOrder_details_id(orderDetailsEntity.getOrder_details_id());
 
+            // add to list
             orderDetailsDtoList.add(orderdetailsDto);
 
         }
