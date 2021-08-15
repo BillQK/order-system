@@ -55,7 +55,7 @@ public class OrderDetailsEntity {
             name = "total_price",
             nullable = false
     )
-    private double totalprice;
+    private double totalPrice;
 
 
     public OrderEntity getOrderEntity() {
@@ -82,12 +82,12 @@ public class OrderDetailsEntity {
         this.orderQty = orderQty;
     }
 
-    public double getTotalprice() {
-        return totalprice;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotalprice(double totalprice) {
-        this.totalprice = totalprice;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Long getOrder_details_id() {

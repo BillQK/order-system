@@ -36,8 +36,9 @@ public class PaymentController {
             // paymentDto
             PaymentDto paymentDto = new PaymentDto();
 
-            // setting attribute
-            paymentDto.setPayment_Date(paymentEntity.getPaymentDate());
+            // setting
+            paymentDto.setPayment_id(paymentEntity.getPayment_id());
+            paymentDto.setPayment_Date();
             paymentDto.setPayment_method(paymentEntity.getPayment_method());
             paymentDto.setUser_id(paymentEntity.getUserEntity().getUser_id());
             paymentDto.setOrder_id(paymentEntity.getOrderEntity().getOrder_id());
@@ -57,7 +58,7 @@ public class PaymentController {
         paymentEntity.setOrderEntity(
                 orderRepository.findById(
                         paymentDto.getOrder_id()).orElseThrow(() -> new RuntimeException("order id not found: ")));
-        paymentEntity.setPaymentDate(paymentDto.getPayment_Date());
+        paymentEntity.setPaymentDate();
         paymentEntity.setPayment_method(paymentDto.getPayment_method());
         paymentRepository.save(paymentEntity);
         return "payment added";

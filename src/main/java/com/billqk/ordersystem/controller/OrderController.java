@@ -11,7 +11,6 @@ import com.billqk.ordersystem.database.repository.UserRepository;
 import com.billqk.ordersystem.model.OrderDetailsDto;
 import com.billqk.ordersystem.model.OrderDto;
 
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -72,7 +71,7 @@ public class OrderController {
             orderDetailsDto.setTotalprice(orderDetailsEntity.getOrderQty() * orderDetailsEntity.getMenuEntity().getPrice());
             orderDetailsDto.setPrice(orderDetailsEntity.getMenuEntity().getPrice());
             orderDetailsDto.setMenuName(orderDetailsEntity.getMenuEntity().getMenuName());
-            totalPrice += orderDetailsEntity.getTotalprice();
+            totalPrice += orderDetailsEntity.getTotalPrice();
             orderDetailsDtoList.add(orderDetailsDto);
         }
         orderDto.setTotalPrice(totalPrice);
@@ -148,7 +147,7 @@ public class OrderController {
             orderDetailsEntity.setMenuEntity(menuEntity);
             // Return total price
             Double totalPrice = orderDetailsDto.getOrderQty() * menuEntity.getPrice();
-            orderDetailsEntity.setTotalprice(totalPrice);
+            orderDetailsEntity.setTotalPrice(totalPrice);
             // save to database
             orderDetailsRepository.save(orderDetailsEntity);
         }

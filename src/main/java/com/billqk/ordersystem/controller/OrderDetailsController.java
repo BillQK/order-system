@@ -1,7 +1,6 @@
 package com.billqk.ordersystem.controller;
 
 import com.billqk.ordersystem.database.domain.OrderDetailsEntity;
-import com.billqk.ordersystem.database.domain.OrderEntity;
 import com.billqk.ordersystem.database.repository.MenuRepository;
 import com.billqk.ordersystem.database.repository.OrderDetailsRepository;
 import com.billqk.ordersystem.database.repository.OrderRepository;
@@ -40,7 +39,7 @@ public class OrderDetailsController {
             // Setting attribute
             orderdetailsDto.setOrderQty(orderDetailsEntity.getOrderQty());
             orderdetailsDto.setOrderId(orderDetailsEntity.getOrderEntity().getOrder_id());
-            orderdetailsDto.setTotalprice(orderDetailsEntity.getTotalprice());
+            orderdetailsDto.setTotalprice(orderDetailsEntity.getTotalPrice());
             orderdetailsDto.setMenuId(orderDetailsEntity.getMenuEntity().getMenuId());
             orderdetailsDto.setOrder_details_id(orderDetailsEntity.getOrder_details_id());
 
@@ -68,7 +67,7 @@ public class OrderDetailsController {
                                 () -> new RuntimeException("Order Id not found: ")));
 
         orderDetailsEntity.setOrderQty(orderDetailsDto.getOrderQty());
-        orderDetailsEntity.setTotalprice(orderDetailsDto.getTotalprice());
+        orderDetailsEntity.setTotalPrice(orderDetailsDto.getTotalprice());
         orderDetailsRepository.save(orderDetailsEntity);
         return "order details added";
     }

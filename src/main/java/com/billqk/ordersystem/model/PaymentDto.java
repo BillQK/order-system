@@ -40,8 +40,8 @@ public class PaymentDto {
         return payment_Date;
     }
 
-    public void setPayment_Date(Date payment_Date) {
-        this.payment_Date = payment_Date;
+    public void setPayment_Date() {
+        this.payment_Date = Calendar.getInstance().getTime();
     }
 
     public Constant.Payments getPayment_method() {

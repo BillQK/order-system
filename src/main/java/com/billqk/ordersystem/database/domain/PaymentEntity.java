@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 
 import javax.persistence.*;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -89,8 +90,8 @@ public class PaymentEntity {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
+    public void setPaymentDate() {
+        this.paymentDate = Calendar.getInstance().getTime() ;
     }
 
     public Constant.Payments getPayment_method() {
