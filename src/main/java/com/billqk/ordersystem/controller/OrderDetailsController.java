@@ -39,7 +39,7 @@ public class OrderDetailsController {
             // Setting attribute
             orderdetailsDto.setOrderQty(orderDetailsEntity.getOrderQty());
             orderdetailsDto.setOrderId(orderDetailsEntity.getOrderEntity().getOrder_id());
-            orderdetailsDto.setTotalprice(orderDetailsEntity.getTotalPrice());
+            orderdetailsDto.setTotalPrice(orderDetailsEntity.getTotalPrice());
             orderdetailsDto.setMenuId(orderDetailsEntity.getMenuEntity().getMenuId());
             orderdetailsDto.setOrder_details_id(orderDetailsEntity.getOrder_details_id());
 
@@ -48,8 +48,6 @@ public class OrderDetailsController {
 
         }
         return orderDetailsDtoList;
-
-
     }
 
     @PostMapping("/")
@@ -60,14 +58,14 @@ public class OrderDetailsController {
         orderDetailsEntity.setMenuEntity(
                 menuRepository.findById(
                         orderDetailsDto.getMenuId()).orElseThrow(
-                                () -> new RuntimeException("Menu id not found : ")));
+                        () -> new RuntimeException("Menu id not found : ")));
 
         orderDetailsEntity.setOrderEntity(
                 orderRepository.findById(orderDetailsDto.getOrderId()).orElseThrow(
-                                () -> new RuntimeException("Order Id not found: ")));
+                        () -> new RuntimeException("Order Id not found: ")));
 
         orderDetailsEntity.setOrderQty(orderDetailsDto.getOrderQty());
-        orderDetailsEntity.setTotalPrice(orderDetailsDto.getTotalprice());
+        orderDetailsEntity.setTotalPrice(orderDetailsDto.getTotalPrice());
         orderDetailsRepository.save(orderDetailsEntity);
         return "order details added";
     }

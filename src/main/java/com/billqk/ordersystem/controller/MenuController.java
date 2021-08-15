@@ -21,12 +21,12 @@ public class MenuController {
     MenuRepository menuRepository;
 
     @GetMapping("/")
-    public List<MenuDto>  getMenu() {
+    public List<MenuDto> getMenu() {
 
         List<MenuEntity> menuEntityList = menuRepository.findAll();
 
         List<MenuDto> menuDtoList = new ArrayList<MenuDto>();
-        for(MenuEntity menuEntity : menuEntityList) {
+        for (MenuEntity menuEntity : menuEntityList) {
             // MenuDto
             MenuDto menuDto = new MenuDto();
             // Setting attribute

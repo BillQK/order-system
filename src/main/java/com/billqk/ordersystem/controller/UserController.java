@@ -38,7 +38,7 @@ public class UserController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createUser (@Valid @RequestBody UserDto userDto) {
+    public String createUser(@Valid @RequestBody UserDto userDto) {
         UserEntity userEntity = new UserEntity();
         userEntity.setFirst_name(userDto.getFirstname());
         userEntity.setLast_name(userDto.getLastname());

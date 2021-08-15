@@ -14,6 +14,7 @@ import com.billqk.ordersystem.model.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,27 +56,39 @@ public class OrderController {
 
      */
     @GetMapping("/{id}")
-    public OrderDto getOrderDto (@PathVariable("id") Long id) {
+    public OrderDto getOrderDto(@PathVariable("id") Long id) {
+        // get order entity id
         OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("order id not found: "));
-
+        // Set orderId, userId, userName, status, totalPrice
         OrderDto orderDto = new OrderDto();
         orderDto.setOrderId(orderEntity.getOrder_id());
+        orderDto.setStatus(orderEntity.getStatus());
         orderDto.setOrderDate(orderEntity.getOrderDate());
+        orderDto.setUserId(orderEntity.getUserEntity().getUser_id());
+        orderDto.setUserName(orderEntity.getUserEntity().getFirst_name() + " " + orderEntity.getUserEntity().getLast_name());
+        Double totalPrice = 0.0;
+
+        // Create orderDetails object in List
         List<OrderDetailsDto> orderDetailsDtoList = new ArrayList<>();
         List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsRepository.findByOrderEntity(orderEntity);
-        Double totalPrice = 0.0;
+
         for (OrderDetailsEntity orderDetailsEntity : orderDetailsEntityList) {
+            // Set menuName, item price, orderQty, totalPrice
             OrderDetailsDto orderDetailsDto = new OrderDetailsDto();
             orderDetailsDto.setOrderQty(orderDetailsEntity.getOrderQty());
-            orderDetailsDto.setTotalprice(orderDetailsEntity.getOrderQty() * orderDetailsEntity.getMenuEntity().getPrice());
+            orderDetailsDto.setTotalPrice(orderDetailsEntity.getOrderQty() * orderDetailsEntity.getMenuEntity().getPrice());
             orderDetailsDto.setPrice(orderDetailsEntity.getMenuEntity().getPrice());
             orderDetailsDto.setMenuName(orderDetailsEntity.getMenuEntity().getMenuName());
             totalPrice += orderDetailsEntity.getTotalPrice();
             orderDetailsDtoList.add(orderDetailsDto);
         }
+        // Set Total Price
         orderDto.setTotalPrice(totalPrice);
+        // Set orderdetailsList
         orderDto.setOrderDetailsDtoList(orderDetailsDtoList);
+
+        // return result
         return orderDto;
     }
 
@@ -98,7 +111,6 @@ public class OrderController {
         return orderDtoList;
     }
 
-
     /*
     {
     "userId" : 1,
@@ -118,7 +130,7 @@ public class OrderController {
      */
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String CreateOrder(@Valid @RequestBody OrderDto orderDto)  {
+    public String CreateOrder(@Valid @RequestBody OrderDto orderDto) {
         OrderEntity orderEntity = new OrderEntity();
         OrderDto orderDto1 = new OrderDto();
 
@@ -126,7 +138,7 @@ public class OrderController {
         orderEntity.setUserEntity(
                 userRepository.findById(
                         orderDto.getUserId()).orElseThrow(
-                                ()-> new RuntimeException("user id not found: "))
+                        () -> new RuntimeException("user id not found: "))
         );
         // database date set
         orderEntity.setOrderDate();
@@ -143,7 +155,7 @@ public class OrderController {
             // Json order quantity
             orderDetailsEntity.setOrderQty(orderDetailsDto.getOrderQty());
             // Json menu id
-            MenuEntity menuEntity = menuRepository.findById(orderDetailsDto.getMenuId()).orElseThrow(()-> new RuntimeException("user id not found: "));
+            MenuEntity menuEntity = menuRepository.findById(orderDetailsDto.getMenuId()).orElseThrow(() -> new RuntimeException("user id not found: "));
             orderDetailsEntity.setMenuEntity(menuEntity);
             // Return total price
             Double totalPrice = orderDetailsDto.getOrderQty() * menuEntity.getPrice();

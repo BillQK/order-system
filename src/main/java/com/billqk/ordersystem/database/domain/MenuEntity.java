@@ -91,6 +91,7 @@ public class MenuEntity {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
     public Constant.Category getCategory() {
         return category;
     }
@@ -111,7 +112,7 @@ public class MenuEntity {
         return description;
     }
 
-    public void setDescription (String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

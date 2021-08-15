@@ -7,7 +7,7 @@ public class OrderDetailsDto {
     private String menuName;
     private double price;
     private int orderQty;
-    private double totalprice;
+    private double totalPrice;
 
     public String getMenuName() {
         return menuName;
@@ -49,13 +49,14 @@ public class OrderDetailsDto {
         this.orderQty = orderQty;
     }
 
-    public double getTotalprice() {
-        return totalprice;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotalprice(double totalPrice) {
-        this.totalprice = totalPrice;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
+
     public long getOrder_details_id() {
         return order_details_id;
     }

@@ -54,7 +54,7 @@ public class PaymentController {
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.setUserEntity(
                 userRepository.findById(
-                        paymentDto.getUser_id()).orElseThrow(()-> new RuntimeException("user id not found: ")));
+                        paymentDto.getUser_id()).orElseThrow(() -> new RuntimeException("user id not found: ")));
         paymentEntity.setOrderEntity(
                 orderRepository.findById(
                         paymentDto.getOrder_id()).orElseThrow(() -> new RuntimeException("order id not found: ")));

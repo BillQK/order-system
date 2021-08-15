@@ -1,4 +1,5 @@
 package com.billqk.ordersystem.database.domain;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -51,7 +52,7 @@ public class OrderDetailsEntity {
     )
     private int orderQty;
 
-    @Column (
+    @Column(
             name = "total_price",
             nullable = false
     )

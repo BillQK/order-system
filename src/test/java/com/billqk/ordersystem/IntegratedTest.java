@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import static org.junit.Assert.assertEquals;
 
 
-public class IntegratedTest extends AbstractTest  {
+public class IntegratedTest extends AbstractTest {
     @Override
     @Before
     public void setUp() {
@@ -32,7 +33,7 @@ public class IntegratedTest extends AbstractTest  {
                 .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
 
         int status = mvcResult.getResponse().getStatus();
-        assertEquals(201,status);
+        assertEquals(201, status);
         String content = mvcResult.getResponse().getContentAsString();
         assertEquals(content, "User added");
     }
@@ -40,7 +41,7 @@ public class IntegratedTest extends AbstractTest  {
     @Test
     public void CreateOrder() throws Exception {
         String uri = "/api/menu/";
-        MenuDto menuDto = new MenuDto(); 
+        MenuDto menuDto = new MenuDto();
     }
 
 
