@@ -64,18 +64,16 @@ public class OrderController {
         orderDto.setOrderId(orderEntity.getOrder_id());
         orderDto.setOrderDate(orderEntity.getOrderDate());
         List<OrderDetailsDto> orderDetailsDtoList = new ArrayList<>();
-        List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsRepository.findAll();
+        List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsRepository.findByOrderEntity(orderEntity);
         Double totalPrice = 0.0;
         for (OrderDetailsEntity orderDetailsEntity : orderDetailsEntityList) {
-            if ( orderDetailsEntity.getOrderEntity().getOrder_id() == id) {
-                OrderDetailsDto orderDetailsDto = new OrderDetailsDto();
-                orderDetailsDto.setOrderQty(orderDetailsEntity.getOrderQty());
-                orderDetailsDto.setTotalprice(orderDetailsEntity.getOrderQty() * orderDetailsEntity.getMenuEntity().getPrice());
-                orderDetailsDto.setPrice(orderDetailsEntity.getMenuEntity().getPrice());
-                orderDetailsDto.setMenuName(orderDetailsEntity.getMenuEntity().getMenuName());
-                totalPrice += orderDetailsEntity.getTotalprice();
-                orderDetailsDtoList.add(orderDetailsDto);
-            }
+            OrderDetailsDto orderDetailsDto = new OrderDetailsDto();
+            orderDetailsDto.setOrderQty(orderDetailsEntity.getOrderQty());
+            orderDetailsDto.setTotalprice(orderDetailsEntity.getOrderQty() * orderDetailsEntity.getMenuEntity().getPrice());
+            orderDetailsDto.setPrice(orderDetailsEntity.getMenuEntity().getPrice());
+            orderDetailsDto.setMenuName(orderDetailsEntity.getMenuEntity().getMenuName());
+            totalPrice += orderDetailsEntity.getTotalprice();
+            orderDetailsDtoList.add(orderDetailsDto);
         }
         orderDto.setTotalPrice(totalPrice);
         orderDto.setOrderDetailsDtoList(orderDetailsDtoList);
