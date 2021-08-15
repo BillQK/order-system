@@ -2,9 +2,6 @@ package com.billqk.ordersystem.model;
 
 public class OrderDetailsDto {
     private long order_details_id;
-
-
-
     private Long orderId;
     private Long menuId;
     private int orderQty;
@@ -39,7 +36,7 @@ public class OrderDetailsDto {
         return totalprice;
     }
 
-    public void setTotalprice(double totalprice) {
+    public void setTotalprice(double totalPrice) {
         this.totalprice = totalprice;
     }
     public long getOrder_details_id() {

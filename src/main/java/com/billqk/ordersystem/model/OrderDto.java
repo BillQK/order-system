@@ -2,12 +2,14 @@ package com.billqk.ordersystem.model;
 
 
 import java.util.Date;
+import java.util.List;
 
 public class OrderDto {
     private Long orderId;
     private Long userId;
     private Date orderDate;
     private String status;
+    private List<OrderDetailsDto> orderDetailsDtoList;
 
     public Long getOrderId() {
         return orderId;
@@ -39,5 +41,13 @@ public class OrderDto {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<OrderDetailsDto> getOrderDetailsDtoList() {
+        return orderDetailsDtoList;
+    }
+
+    public void setOrderDetailsDtoList(List<OrderDetailsDto> orderDetailsDtoList) {
+        this.orderDetailsDtoList = orderDetailsDtoList;
     }
 }

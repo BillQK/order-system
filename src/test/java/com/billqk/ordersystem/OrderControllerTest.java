@@ -46,24 +46,24 @@ public class OrderControllerTest extends AbstractTest {
 
         }
 
-        @Test
-        public void createOrder() throws Exception {
-            String uri = "/api/order/";
-
-
-            OrderDto orderDto = new OrderDto();
-            orderDto.setOrderId(Long.valueOf(1));
-            orderDto.setUserId(Long.valueOf(1));
-            orderDto.setStatus("IN PROGRESS");
-
-            String inputJson = super.mapToJson(orderDto);
-            MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
-                    .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-
-            int status = mvcResult.getResponse().getStatus();
-            assertEquals(201, status);
-            String content = mvcResult.getResponse().getContentAsString();
-            assertEquals(content, "Order added");
-    }
+//        @Test
+//        public void createOrder() throws Exception {
+//            String uri = "/api/order/";
+//
+//
+//            OrderDto orderDto = new OrderDto();
+//            orderDto.setOrderId(Long.valueOf(1));
+//            orderDto.setUserId(Long.valueOf(1));
+//            orderDto.setStatus("IN PROGRESS");
+//
+//            String inputJson = super.mapToJson(orderDto);
+//            MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
+//                    .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+//
+//            int status = mvcResult.getResponse().getStatus();
+//            assertEquals(201, status);
+//            String content = mvcResult.getResponse().getContentAsString();
+//            assertEquals(content, "Order added");
+//    }
 
 }
