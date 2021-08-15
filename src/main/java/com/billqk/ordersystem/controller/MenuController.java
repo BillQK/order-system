@@ -20,7 +20,7 @@ public class MenuController {
     @Autowired
     MenuRepository menuRepository;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<MenuDto> getMenu() {
 
         List<MenuEntity> menuEntityList = menuRepository.findAll();
@@ -42,7 +42,7 @@ public class MenuController {
         return menuDtoList;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public String createMenu(@Valid @RequestBody MenuDto menuDto) {
         MenuEntity menuEntity = new MenuEntity();

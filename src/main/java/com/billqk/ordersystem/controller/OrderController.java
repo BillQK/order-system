@@ -92,7 +92,8 @@ public class OrderController {
         return orderDto;
     }
 
-    @GetMapping("/")
+    // Getting all the orders from database (Don't need to test this)
+    @GetMapping("")
     public List<OrderDto> getOrder() {
         List<OrderEntity> orderEntityList = orderRepository.findAll();
         List<OrderDto> orderDtoList = new ArrayList<>();

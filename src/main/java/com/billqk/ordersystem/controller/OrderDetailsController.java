@@ -26,7 +26,7 @@ public class OrderDetailsController {
     OrderRepository orderRepository;
 
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<OrderDetailsDto> getOrderDetails() {
         List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsRepository.findAll();
 
@@ -50,7 +50,7 @@ public class OrderDetailsController {
         return orderDetailsDtoList;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public String createOrderDetails(@Valid @RequestBody OrderDetailsDto orderDetailsDto) {
         OrderDetailsEntity orderDetailsEntity = new OrderDetailsEntity();

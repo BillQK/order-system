@@ -21,7 +21,7 @@ public class IntegratedTest extends AbstractTest {
 
     @Test
     public void CreateUser() throws Exception {
-        String uri = "/api/user/";
+        String uri = "/api/user";
         UserDto userDto = new UserDto();
         userDto.setAge(19);
         userDto.setEmail("123@gmail.com");
@@ -40,7 +40,7 @@ public class IntegratedTest extends AbstractTest {
 
     @Test
     public void CreateOrder() throws Exception {
-        String uri = "/api/menu/";
+        String uri = "/api/menu";
         MenuDto menuDto = new MenuDto();
     }
 

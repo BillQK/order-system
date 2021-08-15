@@ -26,7 +26,7 @@ public class PaymentController {
     @Autowired
     OrderRepository orderRepository;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<PaymentDto> getPayment() {
         List<PaymentEntity> paymentEntityList = paymentRepository.findAll();
 
@@ -48,7 +48,7 @@ public class PaymentController {
         return paymentDtoList;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public String createPayment(@Valid @RequestBody PaymentDto paymentDto) {
         PaymentEntity paymentEntity = new PaymentEntity();

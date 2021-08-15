@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<UserDto> getUser() {
         List<UserEntity> userEntityList = userRepository.findAll();
         List<UserDto> userDtoList = new ArrayList<UserDto>();
@@ -36,7 +36,7 @@ public class UserController {
         return userDtoList;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public String createUser(@Valid @RequestBody UserDto userDto) {
         UserEntity userEntity = new UserEntity();
