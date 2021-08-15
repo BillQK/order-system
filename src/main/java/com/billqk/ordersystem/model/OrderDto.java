@@ -7,9 +7,28 @@ import java.util.List;
 public class OrderDto {
     private Long orderId;
     private Long userId;
+    private String userName;
     private Date orderDate;
     private String status;
+    private Double totalPrice;
     private List<OrderDetailsDto> orderDetailsDtoList;
+
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public Long getOrderId() {
         return orderId;

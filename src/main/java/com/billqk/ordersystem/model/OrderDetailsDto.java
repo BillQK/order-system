@@ -4,12 +4,29 @@ public class OrderDetailsDto {
     private long order_details_id;
     private Long orderId;
     private Long menuId;
+    private String menuName;
+    private double price;
     private int orderQty;
     private double totalprice;
 
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
 
     public Long getOrderId() {
         return orderId;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setOrderId(Long orderId) {
@@ -37,7 +54,7 @@ public class OrderDetailsDto {
     }
 
     public void setTotalprice(double totalPrice) {
-        this.totalprice = totalprice;
+        this.totalprice = totalPrice;
     }
     public long getOrder_details_id() {
         return order_details_id;

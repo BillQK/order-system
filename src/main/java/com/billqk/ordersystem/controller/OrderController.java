@@ -34,7 +34,53 @@ public class OrderController {
     @Autowired
     OrderDetailsRepository orderDetailsRepository;
 
-    
+    /*
+    {
+    "orderId" : 1,
+    "total" : 70,
+    "orderItems" : [
+        {
+            "menu" : "pho",
+            "price" : 10,
+            "quantity": 3,
+            "total": 30
+        },
+        {
+            "menu" : "hu tieu",
+            "price" : 10,
+            "quantity" : 4,
+            "total" : 40,
+        }
+    ]
+    }
+
+     */
+    @GetMapping("/{id}")
+    public OrderDto getOrderDto (@PathVariable("id") Long id) {
+        OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("order id not found: "));
+
+        OrderDto orderDto = new OrderDto();
+        orderDto.setOrderId(orderEntity.getOrder_id());
+        orderDto.setOrderDate(orderEntity.getOrderDate());
+        List<OrderDetailsDto> orderDetailsDtoList = new ArrayList<>();
+        List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsRepository.findAll();
+        Double totalPrice = 0.0;
+        for (OrderDetailsEntity orderDetailsEntity : orderDetailsEntityList) {
+            if ( orderDetailsEntity.getOrderEntity().getOrder_id() == id) {
+                OrderDetailsDto orderDetailsDto = new OrderDetailsDto();
+                orderDetailsDto.setOrderQty(orderDetailsEntity.getOrderQty());
+                orderDetailsDto.setTotalprice(orderDetailsEntity.getOrderQty() * orderDetailsEntity.getMenuEntity().getPrice());
+                orderDetailsDto.setPrice(orderDetailsEntity.getMenuEntity().getPrice());
+                orderDetailsDto.setMenuName(orderDetailsEntity.getMenuEntity().getMenuName());
+                totalPrice += orderDetailsEntity.getTotalprice();
+                orderDetailsDtoList.add(orderDetailsDto);
+            }
+        }
+        orderDto.setTotalPrice(totalPrice);
+        orderDto.setOrderDetailsDtoList(orderDetailsDtoList);
+        return orderDto;
+    }
 
     @GetMapping("/")
     public List<OrderDto> getOrder() {
@@ -82,7 +128,9 @@ public class OrderController {
         // Json user Id;
         orderEntity.setUserEntity(
                 userRepository.findById(
-                        orderDto.getUserId()).orElseThrow(()-> new RuntimeException("user id not found: ")));
+                        orderDto.getUserId()).orElseThrow(
+                                ()-> new RuntimeException("user id not found: "))
+        );
         // database date set
         orderEntity.setOrderDate();
         // Json status set
