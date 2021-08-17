@@ -6,12 +6,17 @@ public class UserDto {
     private Long id;
     private String firstname;
     private String lastname;
+    private String password;
     private String email;
     private int age;
-    private int mobile;
+    private String mobile;
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public Long getId() {
@@ -54,6 +59,12 @@ public class UserDto {
         this.age = age;
     }
 
-    public void setMobile(int mobile) {
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

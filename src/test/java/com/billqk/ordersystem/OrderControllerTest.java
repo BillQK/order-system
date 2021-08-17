@@ -34,6 +34,8 @@ public class OrderControllerTest extends AbstractTest {
             userDto.setEmail("123@gmail.com");
             userDto.setFirstname("hi");
             userDto.setLastname("hello");
+            userDto.setMobile("0906691007");
+            userDto.setPassword("123");
 
             String inputJson = super.mapToJson(userDto);
             MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)

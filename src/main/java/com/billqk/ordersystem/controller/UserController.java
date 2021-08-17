@@ -1,11 +1,14 @@
 package com.billqk.ordersystem.controller;
 
+import com.billqk.ordersystem.constant.Constant;
 import com.billqk.ordersystem.database.domain.UserEntity;
 import com.billqk.ordersystem.database.repository.UserRepository;
 import com.billqk.ordersystem.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -45,9 +48,39 @@ public class UserController {
         userEntity.setMobile(userDto.getMobile());
         userEntity.setAge(userDto.getAge());
         userEntity.setEmail(userDto.getEmail());
-        userRepository.save(userEntity);
+        userEntity.setRole(Constant.Roles.USER);
+        userEntity.setPassword(userDto.getPassword());
+        try {
+            userRepository.save(userEntity);
+        }
+        catch (DataIntegrityViolationException e) {
+            return e.getRootCause().getMessage();
+        }
         return "User added";
     }
+
+    @PostMapping("/admin")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String createAdmin(@Valid @RequestBody UserDto userDto) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setFirst_name(userDto.getFirstname());
+        userEntity.setLast_name(userDto.getLastname());
+        userEntity.setMobile(userDto.getMobile());
+        userEntity.setAge(userDto.getAge());
+        userEntity.setEmail(userDto.getEmail());
+        userEntity.setRole(Constant.Roles.ADMIN);
+        userEntity.setPassword(userDto.getPassword());
+
+        try {
+            userRepository.save(userEntity);
+        }
+        catch (DataIntegrityViolationException e) {
+            return e.getRootCause().getMessage();
+        }
+
+        return "Admin added";
+    }
+
 
 
 }

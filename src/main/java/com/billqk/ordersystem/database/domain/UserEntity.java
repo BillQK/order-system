@@ -1,6 +1,7 @@
 package com.billqk.ordersystem.database.domain;
 
 
+import com.billqk.ordersystem.constant.Constant;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -48,7 +49,8 @@ public class UserEntity {
     @Column(
             name = "email",
             nullable = false,
-            columnDefinition = "TEXT"
+            columnDefinition = "TEXT",
+            unique = true
     )
     private String email;
 
@@ -62,16 +64,35 @@ public class UserEntity {
     @Column(
             name = "mobile",
             nullable = false,
-            columnDefinition = "INTEGER"
+            columnDefinition = "TEXT",
+            unique = true
     )
-    private Integer mobile;
+    private String mobile;
+    @Column(
+            name = "password",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String password;
+
+    @Column(
+            name = "roles",
+            nullable = false
+
+    )
+    private Constant.Roles role;
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Long getUser_id() {
         return user_id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
     }
 
     public String getFirst_name() {
@@ -106,11 +127,19 @@ public class UserEntity {
         this.age = age;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public Constant.Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Constant.Roles role) {
+        this.role = role;
     }
 }
