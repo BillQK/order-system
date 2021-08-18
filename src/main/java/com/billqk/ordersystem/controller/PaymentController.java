@@ -64,10 +64,9 @@ public class PaymentController {
         try {
 
             paymentRepository.save(paymentEntity);
-        }
-        catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             return e.getRootCause().getMessage();
         }
-            return "payment added";
+        return "payment added";
     }
 }

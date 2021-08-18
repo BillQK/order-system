@@ -24,8 +24,8 @@ public class PaymentEntity {
     )
     @SequenceGenerator(
             name = "payment_sequence",
-            sequenceName =  "payment_sequence",
-            allocationSize =  1
+            sequenceName = "payment_sequence",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = SEQUENCE,
@@ -34,7 +34,7 @@ public class PaymentEntity {
     private Long payment_id;
 
     @ManyToOne
-    @JoinColumn (
+    @JoinColumn(
             name = "user_id",
             nullable = false,
             updatable = false
@@ -50,7 +50,7 @@ public class PaymentEntity {
     )
     private OrderEntity orderEntity;
 
-    @Column (
+    @Column(
             name = "payment_date",
             nullable = false
     )
@@ -92,14 +92,14 @@ public class PaymentEntity {
     }
 
     public void setPaymentDate() {
-        this.paymentDate = Calendar.getInstance().getTime() ;
+        this.paymentDate = Calendar.getInstance().getTime();
     }
 
     public Constant.Payments getPayment_method() {
         return payment_method;
     }
 
-    public void setPayment_method(Constant.Payments paymentmethod) {
-        this.payment_method = paymentmethod;
+    public void setPayment_method(Constant.Payments paymentMethod) {
+        this.payment_method = paymentMethod;
     }
 }

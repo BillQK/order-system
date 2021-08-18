@@ -1,5 +1,6 @@
 package com.billqk.ordersystem;
 
+import com.billqk.ordersystem.constant.Constant;
 import com.billqk.ordersystem.controller.OrderController;
 import com.billqk.ordersystem.database.domain.OrderEntity;
 import com.billqk.ordersystem.database.domain.UserEntity;

@@ -1,5 +1,6 @@
 package com.billqk.ordersystem;
 
+import com.billqk.ordersystem.constant.Constant;
 import com.billqk.ordersystem.model.MenuDto;
 import com.billqk.ordersystem.model.UserDto;
 import org.junit.Before;
@@ -42,8 +43,6 @@ public class IntegratedTest extends AbstractTest {
 
     @Test
     public void CreateOrder() throws Exception {
-        String uri = "/api/menu";
-        MenuDto menuDto = new MenuDto();
     }
 
 

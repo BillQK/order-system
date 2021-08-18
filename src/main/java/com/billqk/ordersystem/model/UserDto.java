@@ -1,5 +1,7 @@
 package com.billqk.ordersystem.model;
 
+import com.billqk.ordersystem.constant.Constant;
+
 import java.net.URL;
 
 public class UserDto {
@@ -67,4 +69,5 @@ public class UserDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

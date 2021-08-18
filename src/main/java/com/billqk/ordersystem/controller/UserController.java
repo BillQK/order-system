@@ -52,8 +52,7 @@ public class UserController {
         userEntity.setPassword(userDto.getPassword());
         try {
             userRepository.save(userEntity);
-        }
-        catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             return e.getRootCause().getMessage();
         }
         return "User added";
@@ -73,14 +72,12 @@ public class UserController {
 
         try {
             userRepository.save(userEntity);
-        }
-        catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             return e.getRootCause().getMessage();
         }
 
         return "Admin added";
     }
-
 
 
 }

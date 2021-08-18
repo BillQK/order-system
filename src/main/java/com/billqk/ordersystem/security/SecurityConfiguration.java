@@ -1,6 +1,7 @@
 package com.billqk.ordersystem.security;
 
 
+import com.billqk.ordersystem.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,10 +10,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 
 @Configuration
@@ -32,13 +31,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/user")
-                .permitAll();
-
+                .antMatchers(HttpMethod.POST, "/api/user").permitAll();
         http
                 .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/order").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/menu").hasAuthority(Constant.Roles.ADMIN.name())
                 .antMatchers(HttpMethod.POST).authenticated();
-
         http
                 .httpBasic();
 

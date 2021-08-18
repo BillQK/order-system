@@ -24,9 +24,6 @@ public class MyUser implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByEmail(s);
-        if (userEntity == null) {
-            throw new UsernameNotFoundException("Email not found");
-        }
         String username = userEntity.getEmail();
         String encodedPassword = new BCryptPasswordEncoder().encode(userEntity.getPassword());
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();

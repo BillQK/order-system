@@ -41,7 +41,7 @@ public class OrderEntity {
     )
     private UserEntity userEntity;
 
-    @Column (
+    @Column(
             name = "order_date",
             nullable = false,
             columnDefinition = "TIME"
