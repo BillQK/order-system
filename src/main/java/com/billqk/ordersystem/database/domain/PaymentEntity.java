@@ -41,11 +41,12 @@ public class PaymentEntity {
     )
     private UserEntity userEntity;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(
             name = "order_id",
             nullable = false,
-            updatable = false
+            updatable = false,
+            unique = true
     )
     private OrderEntity orderEntity;
 

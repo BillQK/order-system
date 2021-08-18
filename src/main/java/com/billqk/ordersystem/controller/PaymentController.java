@@ -6,6 +6,7 @@ import com.billqk.ordersystem.database.repository.PaymentRepository;
 import com.billqk.ordersystem.database.repository.UserRepository;
 import com.billqk.ordersystem.model.PaymentDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,7 +61,13 @@ public class PaymentController {
                         paymentDto.getOrder_id()).orElseThrow(() -> new RuntimeException("order id not found: ")));
         paymentEntity.setPaymentDate();
         paymentEntity.setPayment_method(paymentDto.getPayment_method());
-        paymentRepository.save(paymentEntity);
-        return "payment added";
+        try {
+
+            paymentRepository.save(paymentEntity);
+        }
+        catch (DataIntegrityViolationException e) {
+            return e.getRootCause().getMessage();
+        }
+            return "payment added";
     }
 }
