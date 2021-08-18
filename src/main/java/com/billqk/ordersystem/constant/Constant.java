@@ -9,6 +9,6 @@ public class Constant {
         VISA, MASTERCARD, PAYPAL
     }
     public enum Roles {
-        ADMIN,USER,
+        ADMIN,USER
     }
 }

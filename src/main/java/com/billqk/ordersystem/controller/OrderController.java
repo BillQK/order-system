@@ -93,7 +93,7 @@ public class OrderController {
     }
 
     // Getting all the orders from database (Don't need to test this)
-    @GetMapping("")
+    @GetMapping()
     public List<OrderDto> getOrder() {
         List<OrderEntity> orderEntityList = orderRepository.findAll();
         List<OrderDto> orderDtoList = new ArrayList<>();
@@ -129,7 +129,7 @@ public class OrderController {
 
 }
      */
-    @PostMapping("/")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public String CreateOrder(@Valid @RequestBody OrderDto orderDto) {
         OrderEntity orderEntity = new OrderEntity();
