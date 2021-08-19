@@ -28,7 +28,7 @@ public class IntegratedTest extends AbstractTest {
         userDto.setEmail("123@gmail.com");
         userDto.setFirstname("hello");
         userDto.setLastname("World");
-        userDto.setMobile("0906691007");
+        userDto.setMobile("09007");
         userDto.setPassword("123");
 
         String inputJson = super.mapToJson(userDto);

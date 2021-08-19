@@ -32,10 +32,10 @@ public class OrderControllerTest extends AbstractTest {
             String uri = "/api/user";
             UserDto userDto = new UserDto();
             userDto.setAge(19);
-            userDto.setEmail("123@gmail.com");
+            userDto.setEmail("121@gmail.com");
             userDto.setFirstname("hi");
             userDto.setLastname("hello");
-            userDto.setMobile("0906691007");
+            userDto.setMobile("09061007");
             userDto.setPassword("123");
 
             String inputJson = super.mapToJson(userDto);
