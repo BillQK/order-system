@@ -1,8 +1,13 @@
 package com.billqk.ordersystem.controller;
 
 
+import com.billqk.ordersystem.database.domain.OrderDetailsEntity;
+import com.billqk.ordersystem.database.domain.OrderEntity;
+import com.billqk.ordersystem.database.repository.OrderDetailsRepository;
 import com.billqk.ordersystem.database.repository.OrderRepository;
+import com.billqk.ordersystem.model.OrderDetailsDto;
 import com.billqk.ordersystem.model.OrderDto;
+import com.billqk.ordersystem.model.PaymentDto;
 import com.billqk.ordersystem.service.PaypalService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -10,24 +15,44 @@ import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/pay")
 public class PayPalController {
     @Autowired
     PaypalService service;
 
+    @Autowired
+    OrderRepository orderRepository;
+
+    @Autowired
+    OrderDetailsRepository orderDetailsRepository;
+
     public static final String SUCCESS_URL = "/success";
     public static final String CANCEL_URL = "/cancel";
 
 
     @PostMapping()
-    public String payment (@ModelAttribute("orderDto") OrderDto orderDto) {
+    public String payment (@Valid @RequestBody PaymentDto paymentDto) {
+        Long id = paymentDto.getOrder_id();
+        OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("order Id not found: "));
+
+        List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsRepository.findByOrderEntity(orderEntity);
+        Double totalPrice = 0.0;
+        for (OrderDetailsEntity orderDetailsEntity : orderDetailsEntityList)
+        {
+            totalPrice += orderDetailsEntity.getTotalPrice();
+        }
+
         try
         {
             Payment payment = service.createPayment(
-                    100.00,
+                    totalPrice,
                     "USD", "PayPal",
-                    "order", "Payment for food", CANCEL_URL, SUCCESS_URL);
+                    "order", "Order Number: " + paymentDto.getOrder_id(), CANCEL_URL, SUCCESS_URL);
             for (Links link:payment.getLinks())
             {
                 if (link.getRel().equals(("approval_url")))
