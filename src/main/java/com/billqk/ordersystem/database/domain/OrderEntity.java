@@ -1,5 +1,6 @@
 package com.billqk.ordersystem.database.domain;
 
+import com.billqk.ordersystem.constant.Constant;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -53,7 +54,7 @@ public class OrderEntity {
             nullable = false,
             columnDefinition = "TEXT"
     )
-    private String status;
+    private Constant.Status status;
 
     public Long getOrder_id() {
         return order_id;
@@ -79,11 +80,11 @@ public class OrderEntity {
         this.orderDate = Calendar.getInstance().getTime();
     }
 
-    public String getStatus() {
+    public Constant.Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Constant.Status status) {
         this.status = status;
     }
 }

@@ -1,6 +1,8 @@
 package com.billqk.ordersystem.model;
 
 
+import com.billqk.ordersystem.constant.Constant;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class OrderDto {
     private Long userId;
     private String userName;
     private Date orderDate;
-    private String status;
+    private Constant.Status status;
     private Double totalPrice;
     private List<OrderDetailsDto> orderDetailsDtoList;
 
@@ -54,11 +56,11 @@ public class OrderDto {
         this.orderDate = orderDate;
     }
 
-    public String getStatus() {
+    public Constant.Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Constant.Status status) {
         this.status = status;
     }
 

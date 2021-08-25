@@ -1,5 +1,6 @@
 package com.billqk.ordersystem.controller;
 
+import com.billqk.ordersystem.constant.Constant;
 import com.billqk.ordersystem.database.domain.MenuEntity;
 import com.billqk.ordersystem.database.domain.OrderDetailsEntity;
 import com.billqk.ordersystem.database.domain.OrderEntity;
@@ -94,8 +95,8 @@ public class OrderController {
 
     // Getting all the orders from database (Don't need to test this)
     @GetMapping()
-    public List<OrderDto> getOrder() {
-        List<OrderEntity> orderEntityList = orderRepository.findAll();
+    public List<OrderDto> getOrder(@RequestParam(value="status", required = false)Constant.Status status) {
+        List<OrderEntity> orderEntityList = orderRepository.findByStatus(status);
         List<OrderDto> orderDtoList = new ArrayList<>();
         for (OrderEntity orderEntity : orderEntityList) {
             OrderDto orderDto = new OrderDto();

@@ -12,4 +12,8 @@ public class Constant {
     public enum Roles {
         ADMIN, USER
     }
+
+    public enum Status {
+        RECEIVED, PREPARING, READY, IN_DELIVERY, DELIVERED
+    }
 }
