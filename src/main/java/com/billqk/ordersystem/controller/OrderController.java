@@ -96,7 +96,7 @@ public class OrderController {
     // Getting all the orders from database (Don't need to test this)
     @GetMapping()
     public List<OrderDto> getOrder(@RequestParam Constant.Status status) {
-        List<OrderEntity> orderEntityList = orderRepository.findByStatus(status);
+        List<OrderEntity> orderEntityList = orderRepository.findByStatusOrderByOrderDateDesc(status);
         List<OrderDto> orderDtoList = new ArrayList<>();
         for (OrderEntity orderEntity : orderEntityList) {
             OrderDto orderDto = new OrderDto();
