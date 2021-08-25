@@ -119,8 +119,9 @@ public class OrderController {
                 totalPrice += orderDetailsEntity.getTotalPrice();
                 orderDetailsDtoList.add(orderDetailsDto);
             }
-
+            // adding total price
             orderDto.setTotalPrice(totalPrice);
+            // adding order details list 
             orderDto.setOrderDetailsDtoList(orderDetailsDtoList);
             orderDto.setOrderId(orderEntity.getOrder_id());
             orderDto.setOrderDate(orderEntity.getOrderDate());
