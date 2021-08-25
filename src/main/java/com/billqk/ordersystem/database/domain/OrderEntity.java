@@ -49,6 +49,7 @@ public class OrderEntity {
     )
     private Date orderDate;
 
+    @Enumerated(EnumType.STRING)
     @Column(
             name = "status",
             nullable = false,

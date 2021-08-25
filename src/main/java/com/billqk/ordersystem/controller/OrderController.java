@@ -95,14 +95,33 @@ public class OrderController {
 
     // Getting all the orders from database (Don't need to test this)
     @GetMapping()
-    public List<OrderDto> getOrder(@RequestParam(value="status", required = false)Constant.Status status) {
+    public List<OrderDto> getOrder(@RequestParam Constant.Status status) {
         List<OrderEntity> orderEntityList = orderRepository.findByStatus(status);
         List<OrderDto> orderDtoList = new ArrayList<>();
         for (OrderEntity orderEntity : orderEntityList) {
             OrderDto orderDto = new OrderDto();
             // Get User
             orderDto.setUserId(orderEntity.getUserEntity().getUser_id());
+            orderDto.setUserName(orderEntity.getUserEntity().getEmail());
             //Setting attributes
+            double totalPrice = 0.0;
+            // Create orderDetails object in List
+            List<OrderDetailsDto> orderDetailsDtoList = new ArrayList<>();
+            List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsRepository.findByOrderEntity(orderEntity);
+
+            for (OrderDetailsEntity orderDetailsEntity : orderDetailsEntityList) {
+                // Set menuName, item price, orderQty, totalPrice
+                OrderDetailsDto orderDetailsDto = new OrderDetailsDto();
+                orderDetailsDto.setOrderQty(orderDetailsEntity.getOrderQty());
+                orderDetailsDto.setTotalPrice(orderDetailsEntity.getOrderQty() * orderDetailsEntity.getMenuEntity().getPrice());
+                orderDetailsDto.setPrice(orderDetailsEntity.getMenuEntity().getPrice());
+                orderDetailsDto.setMenuName(orderDetailsEntity.getMenuEntity().getMenuName());
+                totalPrice += orderDetailsEntity.getTotalPrice();
+                orderDetailsDtoList.add(orderDetailsDto);
+            }
+
+            orderDto.setTotalPrice(totalPrice);
+            orderDto.setOrderDetailsDtoList(orderDetailsDtoList);
             orderDto.setOrderId(orderEntity.getOrder_id());
             orderDto.setOrderDate(orderEntity.getOrderDate());
             orderDto.setStatus(orderEntity.getStatus());
