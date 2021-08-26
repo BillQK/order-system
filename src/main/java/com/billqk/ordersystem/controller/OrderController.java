@@ -188,10 +188,10 @@ public class OrderController {
         return "Order added";
     }
 
-    @PutMapping()
+    @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public String updateOrder(@Valid @RequestBody OrderDto orderDto){
-        OrderEntity orderEntity = orderRepository.findById(orderDto.getOrderId()).orElseThrow(
+    public String updateOrder(@PathVariable Long id, @Valid @RequestBody OrderDto orderDto){
+        OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("order Id not found"));
 
         orderEntity.setStatus(orderDto.getStatus());
