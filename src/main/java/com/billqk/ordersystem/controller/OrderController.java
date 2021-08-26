@@ -200,4 +200,15 @@ public class OrderController {
         return "Updated Order"; 
     }
 
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteOrder(@PathVariable Long id) {
+        OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("order id not found:" ));
+        orderDetailsRepository.deleteByOrderEntity(orderEntity);
+        orderRepository.deleteById(id);
+        return "Deleted Order";
+    }
+
 }
