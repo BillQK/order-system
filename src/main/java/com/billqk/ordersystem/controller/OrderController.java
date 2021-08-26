@@ -152,7 +152,7 @@ public class OrderController {
      */
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public String CreateOrder(@Valid @RequestBody OrderDto orderDto) {
+    public String createOrder(@Valid @RequestBody OrderDto orderDto) {
         OrderEntity orderEntity = new OrderEntity();
         OrderDto orderDto1 = new OrderDto();
 
@@ -165,7 +165,7 @@ public class OrderController {
         // database date set
         orderEntity.setOrderDate();
         // Json status set
-        orderEntity.setStatus(orderDto.getStatus());
+        orderEntity.setStatus(Constant.Status.IN_QUEUE);
 
         // Json Order Details List Set
         orderRepository.save(orderEntity);
@@ -186,6 +186,18 @@ public class OrderController {
             orderDetailsRepository.save(orderDetailsEntity);
         }
         return "Order added";
+    }
+
+    @PutMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public String updateOrder(@Valid @RequestBody OrderDto orderDto){
+        OrderEntity orderEntity = orderRepository.findById(orderDto.getOrderId()).orElseThrow(
+                () -> new RuntimeException("order Id not found"));
+
+        orderEntity.setStatus(orderDto.getStatus());
+        orderRepository.save(orderEntity);
+
+        return "Updated Order"; 
     }
 
 }
