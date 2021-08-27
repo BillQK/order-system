@@ -1,12 +1,20 @@
 package com.billqk.ordersystem.model;
 
 import com.billqk.ordersystem.constant.Constant;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class MenuDto {
     private Long menuId;
     private String description;
@@ -14,54 +22,5 @@ public class MenuDto {
     private String menuName;
     private Double price;
     private Constant.Category category;
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public Long getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
-    }
-
-    public String getMenuName() {
-        return menuName;
-    }
-
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
-
-    public Constant.Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Constant.Category category) {
-        this.category = category;
-    }
-
-    public Double getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
 
 }
