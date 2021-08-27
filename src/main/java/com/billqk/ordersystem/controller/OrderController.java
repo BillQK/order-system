@@ -190,14 +190,14 @@ public class OrderController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public String updateOrder(@PathVariable Long id, @Valid @RequestBody OrderDto orderDto){
+    public String updateOrder(@PathVariable Long id, @Valid @RequestBody OrderDto orderDto) {
         OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("order Id not found"));
 
         orderEntity.setStatus(orderDto.getStatus());
         orderRepository.save(orderEntity);
 
-        return "Updated Order"; 
+        return "Updated Order";
     }
 
 
@@ -205,7 +205,7 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public String deleteOrder(@PathVariable Long id) {
         OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("order id not found:" ));
+                () -> new RuntimeException("order id not found:"));
         orderDetailsRepository.deleteByOrderEntity(orderEntity);
         orderRepository.deleteById(id);
         return "Deleted Order";

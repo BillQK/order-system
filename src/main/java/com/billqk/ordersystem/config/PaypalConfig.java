@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.paypal.base.rest.OAuthTokenCredential;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,14 +24,14 @@ public class PaypalConfig {
 
     @Bean
     public Map<String, String> paypalSdkConfig() {
-        Map<String,String> configMap = new HashMap<>();
+        Map<String, String> configMap = new HashMap<>();
         configMap.put("mode", mode);
         return configMap;
     }
 
     @Bean
     public OAuthTokenCredential oAuthTokenCredential() {
-        return new OAuthTokenCredential(cliendId,clientSercret,paypalSdkConfig());
+        return new OAuthTokenCredential(cliendId, clientSercret, paypalSdkConfig());
     }
 
     @Bean

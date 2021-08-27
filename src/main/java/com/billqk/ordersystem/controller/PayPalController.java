@@ -35,28 +35,24 @@ public class PayPalController {
 
 
     @PostMapping()
-    public String payment (@Valid @RequestBody PaymentDto paymentDto) {
+    public String payment(@Valid @RequestBody PaymentDto paymentDto) {
         Long id = paymentDto.getOrder_id();
         OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("order Id not found: "));
 
         List<OrderDetailsEntity> orderDetailsEntityList = orderDetailsRepository.findByOrderEntity(orderEntity);
         Double totalPrice = 0.0;
-        for (OrderDetailsEntity orderDetailsEntity : orderDetailsEntityList)
-        {
+        for (OrderDetailsEntity orderDetailsEntity : orderDetailsEntityList) {
             totalPrice += orderDetailsEntity.getTotalPrice();
         }
 
-        try
-        {
+        try {
             Payment payment = service.createPayment(
                     totalPrice,
                     "USD", "PayPal",
                     "order", "Order Number: " + paymentDto.getOrder_id(), CANCEL_URL, SUCCESS_URL);
-            for (Links link:payment.getLinks())
-            {
-                if (link.getRel().equals(("approval_url")))
-                {
+            for (Links link : payment.getLinks()) {
+                if (link.getRel().equals(("approval_url"))) {
                     return "redirect:" + link.getHref();
                 }
             }
@@ -69,19 +65,15 @@ public class PayPalController {
 
     @GetMapping(value = SUCCESS_URL)
     public String successPay(@RequestParam("paymentId") String paymentId,
-                             @RequestParam("PayerID") String payerId)
-    {
-        try
-        {
+                             @RequestParam("PayerID") String payerId) {
+        try {
             Payment payment = service.executePayment(paymentId, payerId);
             System.out.println(payment.toJSON());
-            if (payment.getState().equals("approved"))
-            {
+            if (payment.getState().equals("approved")) {
                 return "success";
 
             }
-        } catch (PayPalRESTException e)
-        {
+        } catch (PayPalRESTException e) {
             System.out.println(e.getMessage());
         }
         return "redirect:/";
@@ -89,8 +81,7 @@ public class PayPalController {
 
 
     @GetMapping(value = CANCEL_URL)
-    public String cancelPay()
-    {
+    public String cancelPay() {
         return "cancel";
     }
 }
