@@ -2,10 +2,19 @@ package com.billqk.ordersystem.model;
 
 
 import com.billqk.ordersystem.constant.Constant;
+import jdk.jfr.StackTrace;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class OrderDto {
     private Long orderId;
     private Long userId;
@@ -16,59 +25,4 @@ public class OrderDto {
     private List<OrderDetailsDto> orderDetailsDtoList;
 
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public Constant.Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Constant.Status status) {
-        this.status = status;
-    }
-
-    public List<OrderDetailsDto> getOrderDetailsDtoList() {
-        return orderDetailsDtoList;
-    }
-
-    public void setOrderDetailsDtoList(List<OrderDetailsDto> orderDetailsDtoList) {
-        this.orderDetailsDtoList = orderDetailsDtoList;
-    }
 }
