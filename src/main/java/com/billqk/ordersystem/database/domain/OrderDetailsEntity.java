@@ -1,11 +1,16 @@
 package com.billqk.ordersystem.database.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
+
+@Getter
+@Setter
 @Entity
 @Table(name = "order_details")
 @EntityListeners(AuditingEntityListener.class)
@@ -57,47 +62,6 @@ public class OrderDetailsEntity {
             nullable = false
     )
     private double totalPrice;
-
-
-    public OrderEntity getOrderEntity() {
-        return orderEntity;
-    }
-
-    public void setOrderEntity(OrderEntity orderEntity) {
-        this.orderEntity = orderEntity;
-    }
-
-    public MenuEntity getMenuEntity() {
-        return menuEntity;
-    }
-
-    public void setMenuEntity(MenuEntity menuEntity) {
-        this.menuEntity = menuEntity;
-    }
-
-    public int getOrderQty() {
-        return orderQty;
-    }
-
-    public void setOrderQty(int orderQty) {
-        this.orderQty = orderQty;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public Long getOrder_details_id() {
-        return order_details_id;
-    }
-
-    public void setOrder_details_id(Long order_details_id) {
-        this.order_details_id = order_details_id;
-    }
 
 
 }

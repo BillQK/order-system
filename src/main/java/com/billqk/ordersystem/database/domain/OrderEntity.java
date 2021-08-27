@@ -1,6 +1,8 @@
 package com.billqk.ordersystem.database.domain;
 
 import com.billqk.ordersystem.constant.Constant;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -11,6 +13,9 @@ import java.util.Calendar;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
+
+@Getter
+@Setter
 @Entity
 @Table(name = "orders")
 @EntityListeners(AuditingEntityListener.class)
@@ -57,35 +62,10 @@ public class OrderEntity {
     )
     private Constant.Status status;
 
-    public Long getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(Long order_id) {
-        this.order_id = order_id;
-    }
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
 
     public void setOrderDate() {
         this.orderDate = Calendar.getInstance().getTime();
     }
 
-    public Constant.Status getStatus() {
-        return status;
-    }
 
-    public void setStatus(Constant.Status status) {
-        this.status = status;
-    }
 }
