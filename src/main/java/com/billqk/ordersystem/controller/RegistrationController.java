@@ -4,10 +4,7 @@ package com.billqk.ordersystem.controller;
 import com.billqk.ordersystem.service.RegistrationRequest;
 import com.billqk.ordersystem.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/registration")
@@ -21,5 +18,10 @@ public class RegistrationController {
 
         return registrationService.register(request);
 
+    }
+    @GetMapping()
+    public String confirm(@RequestParam("token") String token)
+    {
+        return registrationService.confirmToken(token);
     }
 }

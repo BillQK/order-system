@@ -67,4 +67,7 @@ public class MyUserService implements UserDetailsService {
     }
 
 
+    public int enableUserEntity(String email) {
+        return userRepository.enableUserEntity(email);
+    }
 }
