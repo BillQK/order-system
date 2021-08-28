@@ -19,6 +19,14 @@ public class RegistrationController {
         return registrationService.register(request);
 
     }
+
+    @PostMapping("/admin")
+    public String registerAdmin(@RequestBody RegistrationRequest request)
+    {
+
+        return registrationService.registerAdmin(request);
+
+    }
     @GetMapping()
     public String confirm(@RequestParam("token") String token)
     {
