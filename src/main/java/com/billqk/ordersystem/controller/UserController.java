@@ -27,47 +27,23 @@ public class UserController {
         for (UserEntity userEntity : userEntityList) {
             UserDto userDto = new UserDto();
             // Setting attributes
-            userDto.setAge(userEntity.getAge());
             userDto.setEmail(userEntity.getEmail());
-            userDto.setFirstname(userEntity.getFirst_name());
-            userDto.setLastname(userEntity.getLast_name());
-            userDto.setMobile(userEntity.getMobile());
-            userDto.setId(userEntity.getUser_id());
+            userDto.setName(userEntity.getFirstName());
+            userDto.setUsername(userEntity.getLastName());
             // Adding to list of user
             userDtoList.add(userDto);
         }
         return userDtoList;
     }
 
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String createUser(@Valid @RequestBody UserDto userDto) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setFirst_name(userDto.getFirstname());
-        userEntity.setLast_name(userDto.getLastname());
-        userEntity.setMobile(userDto.getMobile());
-        userEntity.setAge(userDto.getAge());
-        userEntity.setEmail(userDto.getEmail());
-        userEntity.setRole(Constant.Roles.USER);
-        userEntity.setPassword(userDto.getPassword());
-        try {
-            userRepository.save(userEntity);
-        } catch (DataIntegrityViolationException e) {
-            return e.getRootCause().getMessage();
-        }
-        return "User added";
-    }
-
     @PostMapping("/admin")
     @ResponseStatus(HttpStatus.CREATED)
     public String createAdmin(@Valid @RequestBody UserDto userDto) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setFirst_name(userDto.getFirstname());
-        userEntity.setLast_name(userDto.getLastname());
-        userEntity.setMobile(userDto.getMobile());
-        userEntity.setAge(userDto.getAge());
+        userEntity.setFirstName(userDto.getName());
+        userEntity.setLastName(userDto.getUsername());
         userEntity.setEmail(userDto.getEmail());
-        userEntity.setRole(Constant.Roles.ADMIN);
+        userEntity.setRoles(Constant.Roles.ADMIN);
         userEntity.setPassword(userDto.getPassword());
 
         try {

@@ -13,12 +13,9 @@ import java.net.URL;
 @Setter
 @NoArgsConstructor
 public class UserDto {
-    private Long id;
-    private String firstname;
-    private String lastname;
-    private String password;
+    private String name;
+    private String username;
     private String email;
-    private int age;
-    private String mobile;
+    private String password;
 
 }

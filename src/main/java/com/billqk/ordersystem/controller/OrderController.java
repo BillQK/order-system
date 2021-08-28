@@ -67,7 +67,7 @@ public class OrderController {
         orderDto.setStatus(orderEntity.getStatus());
         orderDto.setOrderDate(orderEntity.getOrderDate());
         orderDto.setUserId(orderEntity.getUserEntity().getUser_id());
-        orderDto.setUserName(orderEntity.getUserEntity().getFirst_name() + " " + orderEntity.getUserEntity().getLast_name());
+        orderDto.setUserName(orderEntity.getUserEntity().getLastName());
         Double totalPrice = 0.0;
 
         // Create orderDetails object in List
