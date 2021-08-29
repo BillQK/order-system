@@ -1,9 +1,8 @@
 package com.billqk.ordersystem.service;
 
+import com.billqk.ordersystem.database.domain.ConfirmationToken;
 import com.billqk.ordersystem.database.domain.UserEntity;
 import com.billqk.ordersystem.database.repository.UserRepository;
-import com.billqk.ordersystem.service.token.ConfirmationToken;
-import com.billqk.ordersystem.service.token.ConfirmationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

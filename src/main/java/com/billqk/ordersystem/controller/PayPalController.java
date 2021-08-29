@@ -5,8 +5,6 @@ import com.billqk.ordersystem.database.domain.OrderDetailsEntity;
 import com.billqk.ordersystem.database.domain.OrderEntity;
 import com.billqk.ordersystem.database.repository.OrderDetailsRepository;
 import com.billqk.ordersystem.database.repository.OrderRepository;
-import com.billqk.ordersystem.model.OrderDetailsDto;
-import com.billqk.ordersystem.model.OrderDto;
 import com.billqk.ordersystem.model.PaymentDto;
 import com.billqk.ordersystem.service.PaypalService;
 import com.paypal.api.payments.Links;

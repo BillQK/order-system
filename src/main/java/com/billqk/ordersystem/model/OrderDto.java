@@ -2,8 +2,6 @@ package com.billqk.ordersystem.model;
 
 
 import com.billqk.ordersystem.constant.Constant;
-import jdk.jfr.StackTrace;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

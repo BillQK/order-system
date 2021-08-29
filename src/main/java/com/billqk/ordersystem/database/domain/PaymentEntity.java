@@ -4,10 +4,8 @@ import com.billqk.ordersystem.constant.Constant;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.web.bind.annotation.CookieValue;
 
 import javax.persistence.*;
-
 import java.util.Calendar;
 import java.util.Date;
 

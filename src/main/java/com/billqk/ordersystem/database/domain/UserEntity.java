@@ -82,6 +82,7 @@ public class UserEntity implements UserDetails {
     public String getFirstName() {
         return firstName;
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

@@ -1,7 +1,9 @@
-package com.billqk.ordersystem.service;
+package com.billqk.ordersystem.model;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
