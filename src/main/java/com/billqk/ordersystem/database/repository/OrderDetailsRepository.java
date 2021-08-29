@@ -2,8 +2,6 @@ package com.billqk.ordersystem.database.repository;
 
 import com.billqk.ordersystem.database.domain.OrderDetailsEntity;
 import com.billqk.ordersystem.database.domain.OrderEntity;
-import com.billqk.ordersystem.model.OrderDetailsDto;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;

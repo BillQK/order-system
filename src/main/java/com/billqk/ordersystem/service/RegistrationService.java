@@ -1,10 +1,9 @@
 package com.billqk.ordersystem.service;
 
 import com.billqk.ordersystem.constant.Constant;
+import com.billqk.ordersystem.database.domain.ConfirmationToken;
 import com.billqk.ordersystem.database.domain.UserEntity;
-import com.billqk.ordersystem.service.email.EmailSender;
-import com.billqk.ordersystem.service.token.ConfirmationToken;
-import com.billqk.ordersystem.service.token.ConfirmationTokenService;
+import com.billqk.ordersystem.model.RegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +13,16 @@ import java.time.LocalDateTime;
 @Service
 public class RegistrationService {
     @Autowired
-    MyUserService myUserService;
+    private MyUserService myUserService;
 
     @Autowired
-    EmailValidator emailValidator;
+    private EmailValidator emailValidator;
 
     @Autowired
-    ConfirmationTokenService confirmationTokenService;
+    private ConfirmationTokenService confirmationTokenService;
 
     @Autowired
-    EmailSender emailSender;
+    private EmailSender emailSender;
 
 
     public String register(RegistrationRequest request) {
@@ -44,7 +43,7 @@ public class RegistrationService {
         String link = "http://localhost:5000/api/registration?token=" + token;
         emailSender.send(
                 request.getEmail(),
-                buildEmail(request.getFirstName(),link));
+                buildEmail(request.getFirstName(), link));
         return token;
     }
 
@@ -66,7 +65,7 @@ public class RegistrationService {
         String link = "http://localhost:5000/api/registration?token=" + token;
         emailSender.send(
                 request.getEmail(),
-                buildEmail(request.getFirstName(),link));
+                buildEmail(request.getFirstName(), link));
         return token;
     }
 

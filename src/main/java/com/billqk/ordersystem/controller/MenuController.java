@@ -1,16 +1,13 @@
 package com.billqk.ordersystem.controller;
 
 import com.billqk.ordersystem.database.domain.MenuEntity;
-import com.billqk.ordersystem.database.domain.UserEntity;
 import com.billqk.ordersystem.database.repository.MenuRepository;
-import com.billqk.ordersystem.database.repository.UserRepository;
 import com.billqk.ordersystem.model.MenuDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.ArrayList;
 import java.util.List;
 

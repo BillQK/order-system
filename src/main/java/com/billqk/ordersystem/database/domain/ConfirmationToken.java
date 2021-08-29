@@ -1,6 +1,5 @@
-package com.billqk.ordersystem.service.token;
+package com.billqk.ordersystem.database.domain;
 
-import com.billqk.ordersystem.database.domain.UserEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

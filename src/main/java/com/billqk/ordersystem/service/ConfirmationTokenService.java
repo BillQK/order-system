@@ -1,7 +1,7 @@
-package com.billqk.ordersystem.service.token;
+package com.billqk.ordersystem.service;
 
-import jdk.nashorn.internal.runtime.options.Option;
-import lombok.AllArgsConstructor;
+import com.billqk.ordersystem.database.domain.ConfirmationToken;
+import com.billqk.ordersystem.database.repository.ConfirmationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +14,11 @@ public class ConfirmationTokenService {
     @Autowired
     ConfirmationTokenRepository confirmationTokenRepository;
 
-    public void saveConfirmationToken(ConfirmationToken token)
-    {
+    public void saveConfirmationToken(ConfirmationToken token) {
         confirmationTokenRepository.save(token);
     }
 
-    public Optional<ConfirmationToken> getToken(String token)
-    {
+    public Optional<ConfirmationToken> getToken(String token) {
         return confirmationTokenRepository.findByToken(token);
     }
 
