@@ -36,24 +36,5 @@ public class UserController {
         return userDtoList;
     }
 
-    @PostMapping("/admin")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String createAdmin(@Valid @RequestBody UserDto userDto) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setFirstName(userDto.getName());
-        userEntity.setLastName(userDto.getUsername());
-        userEntity.setEmail(userDto.getEmail());
-        userEntity.setRoles(Constant.Roles.ADMIN);
-        userEntity.setPassword(userDto.getPassword());
-
-        try {
-            userRepository.save(userEntity);
-        } catch (DataIntegrityViolationException e) {
-            return e.getRootCause().getMessage();
-        }
-
-        return "Admin added";
-    }
-
 
 }
