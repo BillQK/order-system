@@ -28,6 +28,12 @@ public class MyUserService implements UserDetailsService {
     @Autowired
     ConfirmationTokenService confirmationTokenService;
 
+    @Autowired
+    EmailService emailService;
+
+    @Autowired
+    RegistrationService registrationService;
+
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.findByEmail(s).orElseThrow(
                 () -> new UsernameNotFoundException(
@@ -40,7 +46,31 @@ public class MyUserService implements UserDetailsService {
         boolean userExists = userRepository.findByEmail(userEntity.getEmail())
                 .isPresent();
 
+        UserEntity user = userRepository.findByEmail(userEntity.getEmail()).orElseThrow(
+                () -> new UsernameNotFoundException("Email not found")
+        );
+
+        String token = UUID.randomUUID().toString();
+
         if (userExists) {
+            // TODO check of attributes are the same and
+            // TODO if email not confirmed send confirmation email.
+            if (!user.isEnabled()) {
+                String link = "http://localhost:5000/api/registration?token=" + token;
+
+                emailService.send(user.getEmail(),
+                        registrationService.buildEmail(user.getFirstName(), link));
+
+                ConfirmationToken confirmationToken = new ConfirmationToken(
+                        token,
+                        LocalDateTime.now(),
+                        LocalDateTime.now().plusMinutes(15),
+                        user
+                );
+
+                confirmationTokenService.saveConfirmationToken(confirmationToken);
+                return "Email confirmation has been sent";
+            }
             throw new IllegalStateException("email already taken");
         }
 
@@ -51,7 +81,6 @@ public class MyUserService implements UserDetailsService {
         userRepository.save(userEntity);
 
 
-        String token = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
                 LocalDateTime.now(),
