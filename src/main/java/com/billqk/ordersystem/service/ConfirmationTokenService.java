@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-
 public class ConfirmationTokenService {
     @Autowired
     ConfirmationTokenRepository confirmationTokenRepository;
