@@ -46,13 +46,14 @@ public class MyUserService implements UserDetailsService {
         boolean userExists = userRepository.findByEmail(userEntity.getEmail())
                 .isPresent();
 
-        UserEntity user = userRepository.findByEmail(userEntity.getEmail()).orElseThrow(
-                () -> new UsernameNotFoundException("Email not found")
-        );
+
 
         String token = UUID.randomUUID().toString();
 
         if (userExists) {
+            UserEntity user = userRepository.findByEmail(userEntity.getEmail()).orElseThrow(
+                    () -> new UsernameNotFoundException("Email not found")
+            );
             // TODO check of attributes are the same and
             // TODO if email not confirmed send confirmation email.
             if (!user.isEnabled()) {
@@ -69,7 +70,7 @@ public class MyUserService implements UserDetailsService {
                 );
 
                 confirmationTokenService.saveConfirmationToken(confirmationToken);
-                return "Email confirmation has been sent";
+                return "Email confirmation has been resent";
             }
             throw new IllegalStateException("email already taken");
         }
