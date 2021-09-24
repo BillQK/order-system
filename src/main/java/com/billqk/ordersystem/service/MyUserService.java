@@ -45,9 +45,6 @@ public class MyUserService implements UserDetailsService {
     public String signUpUser(UserEntity userEntity) {
         boolean userExists = userRepository.findByEmail(userEntity.getEmail())
                 .isPresent();
-
-
-
         String token = UUID.randomUUID().toString();
 
         if (userExists) {
@@ -98,5 +95,17 @@ public class MyUserService implements UserDetailsService {
 
     public int enableUserEntity(String email) {
         return userRepository.enableUserEntity(email);
+    }
+
+    public String createPasswordResetTokenForUser(UserEntity userEntity) {
+        String token = UUID.randomUUID().toString();
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                userEntity
+        );
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+        return token;
     }
 }
