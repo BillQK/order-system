@@ -43,5 +43,13 @@ public class UserController {
         return passwordResetService.resetPassword(email);
     }
 
+    @GetMapping("/confirmPasswordReset")
+    public String confirm(@RequestParam("token") String token) {
+        passwordResetService.validatePasswordResetToken(token);
+        return "Confirmed";
+
+        // TODO: Link the user to the Password Reset Page
+    }
+
 
 }
