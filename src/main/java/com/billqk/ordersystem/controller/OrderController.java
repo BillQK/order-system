@@ -4,14 +4,12 @@ import com.billqk.ordersystem.constant.Constant;
 import com.billqk.ordersystem.database.domain.MenuEntity;
 import com.billqk.ordersystem.database.domain.OrderDetailsEntity;
 import com.billqk.ordersystem.database.domain.OrderEntity;
-
 import com.billqk.ordersystem.database.repository.MenuRepository;
 import com.billqk.ordersystem.database.repository.OrderDetailsRepository;
 import com.billqk.ordersystem.database.repository.OrderRepository;
 import com.billqk.ordersystem.database.repository.UserRepository;
 import com.billqk.ordersystem.model.OrderDetailsDto;
 import com.billqk.ordersystem.model.OrderDto;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -67,7 +65,7 @@ public class OrderController {
         orderDto.setStatus(orderEntity.getStatus());
         orderDto.setOrderDate(orderEntity.getOrderDate());
         orderDto.setUserId(orderEntity.getUserEntity().getUser_id());
-        orderDto.setUserName(orderEntity.getUserEntity().getFirst_name() + " " + orderEntity.getUserEntity().getLast_name());
+        orderDto.setUserName(orderEntity.getUserEntity().getLastName());
         Double totalPrice = 0.0;
 
         // Create orderDetails object in List
@@ -152,7 +150,7 @@ public class OrderController {
      */
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public String CreateOrder(@Valid @RequestBody OrderDto orderDto) {
+    public String createOrder(@Valid @RequestBody OrderDto orderDto) {
         OrderEntity orderEntity = new OrderEntity();
         OrderDto orderDto1 = new OrderDto();
 
@@ -165,7 +163,7 @@ public class OrderController {
         // database date set
         orderEntity.setOrderDate();
         // Json status set
-        orderEntity.setStatus(orderDto.getStatus());
+        orderEntity.setStatus(Constant.Status.IN_QUEUE);
 
         // Json Order Details List Set
         orderRepository.save(orderEntity);
@@ -186,6 +184,29 @@ public class OrderController {
             orderDetailsRepository.save(orderDetailsEntity);
         }
         return "Order added";
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String updateOrder(@PathVariable Long id, @Valid @RequestBody OrderDto orderDto) {
+        OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("order Id not found"));
+
+        orderEntity.setStatus(orderDto.getStatus());
+        orderRepository.save(orderEntity);
+
+        return "Updated Order";
+    }
+
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteOrder(@PathVariable Long id) {
+        OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("order id not found:"));
+        orderDetailsRepository.deleteByOrderEntity(orderEntity);
+        orderRepository.deleteById(id);
+        return "Deleted Order";
     }
 
 }

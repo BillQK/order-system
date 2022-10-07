@@ -1,16 +1,19 @@
 package com.billqk.ordersystem.database.domain;
 
 import com.billqk.ordersystem.constant.Constant;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.web.bind.annotation.CookieValue;
 
 import javax.persistence.*;
-
 import java.util.Calendar;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
+
+@Getter
+@Setter
 @Entity
 @Table(name = "payments")
 @EntityListeners(AuditingEntityListener.class)
@@ -62,44 +65,8 @@ public class PaymentEntity {
     @Enumerated(EnumType.STRING)
     private Constant.Payments payment_method;
 
-
-    public Long getPayment_id() {
-        return payment_id;
-    }
-
-    public void setPayment_id(Long payment_id) {
-        this.payment_id = payment_id;
-    }
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
-    public OrderEntity getOrderEntity() {
-        return orderEntity;
-    }
-
-    public void setOrderEntity(OrderEntity orderEntity) {
-        this.orderEntity = orderEntity;
-    }
-
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
     public void setPaymentDate() {
         this.paymentDate = Calendar.getInstance().getTime();
     }
 
-    public Constant.Payments getPayment_method() {
-        return payment_method;
-    }
-
-    public void setPayment_method(Constant.Payments paymentMethod) {
-        this.payment_method = paymentMethod;
-    }
 }

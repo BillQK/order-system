@@ -2,18 +2,30 @@ package com.billqk.ordersystem.database.domain;
 
 
 import com.billqk.ordersystem.constant.Constant;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.net.URL;
+import java.util.Collection;
+import java.util.Collections;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
-public class UserEntity {
-    // Primary Key
+public class UserEntity implements UserDetails {
+
     @Id
     @SequenceGenerator(
             name = "user_sequence",
@@ -23,123 +35,73 @@ public class UserEntity {
     @GeneratedValue(
             strategy = SEQUENCE,
             generator = "user_sequence"
-
-    )
-    @Column(
-            name = "user_id",
-            updatable = false,
-            nullable = false
     )
     private Long user_id;
-
-    @Column(
-            name = "first_name",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
-    private String first_name;
-
-    @Column(
-            name = "last_name",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
-    private String last_name;
-
-    @Column(
-            name = "email",
-            nullable = false,
-            columnDefinition = "TEXT",
-            unique = true
-    )
+    private String firstName;
+    private String lastName;
     private String email;
-
-    @Column(
-            name = "age",
-            nullable = false,
-            columnDefinition = "INTEGER"
-    )
-    private int age;
-
-    @Column(
-            name = "mobile",
-            nullable = false,
-            columnDefinition = "TEXT",
-            unique = true
-    )
-    private String mobile;
-    @Column(
-            name = "password",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Constant.Roles roles;
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
-    @Column(
-            name = "roles",
-            nullable = false
+    public UserEntity(String firstName,
+                      String lastName,
+                      String email,
+                      String password,
+                      Constant.Roles roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 
-    )
-    private Constant.Roles role;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority =
+                new SimpleGrantedAuthority(roles.name());
+        return Collections.singletonList(authority);
+    }
 
-
+    @Override
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getLastName() {
+        return lastName;
     }
 
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public String getEmail() {
+    @Override
+    public String getUsername() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public int getAge() {
-        return age;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
     }
 
-    public String getMobile() {
-        return mobile;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public Constant.Roles getRole() {
-        return role;
-    }
 
-    public void setRole(Constant.Roles role) {
-        this.role = role;
-    }
 }

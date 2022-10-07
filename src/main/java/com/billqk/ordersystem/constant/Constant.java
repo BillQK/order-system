@@ -14,6 +14,6 @@ public class Constant {
     }
 
     public enum Status {
-        RECEIVED, PREPARING, READY, IN_DELIVERY, DELIVERED
+        IN_QUEUE, RECEIVED, READY, IN_DELIVERY, DELIVERED
     }
 }
