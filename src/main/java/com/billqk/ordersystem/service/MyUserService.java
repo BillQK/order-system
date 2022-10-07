@@ -46,8 +46,6 @@ public class MyUserService implements UserDetailsService {
         boolean userExists = userRepository.findByEmail(userEntity.getEmail())
                 .isPresent();
 
-
-
         String token = UUID.randomUUID().toString();
 
         if (userExists) {

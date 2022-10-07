@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class PaypalConfig {
+public class    PaypalConfig {
 
     @Value("${paypal.client.id}")
     private String cliendId;
